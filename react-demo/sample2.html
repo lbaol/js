@@ -25,9 +25,11 @@
 		
 		render:function() {
 			var comments = this.props.comments;
+			console.log(comments);
 			return (
 				<div className="comment-list">
 				{	
+
 					comments.map(function(comment,index){
 						return <Comment key={index} author={comment.author}>{comment.body}</Comment>
 					})
@@ -66,9 +68,16 @@
 				<div className="comment-box">
 			        <h1>Comments</h1>
 			        <CommentList comments={this.state.comments}/>
-			        <CommentForm/>
+			        <CommentForm onSubmit={(comment) => this.handleComment(comment)}/>
 			    </div>
 			)
+		},
+		handleComment:function(comment){
+			console.log(comment);
+			var newComments = this.state.comments.concat([comment])
+			this.setState({
+				comments:newComments
+			})
 		}
 	})
 
@@ -99,7 +108,12 @@
 		},
 		handleSubmit:function(e){
 			e.preventDefault();
-			console.log(e)
+			var m = {
+				author:this.refs.author.value,
+				body:this.refs.body.value
+			}
+			console.log(m);
+			this.props.onSubmit(m);
 		}
 	})
 
