@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react-demo</title>
+	<script type="text/javascript" src="js/react.js"></script>
+	<script type="text/javascript" src="js/react-dom.js"></script>
+	<script type="text/javascript" src="js/browser.js"></script>
+	<link rel="stylesheet" type="text/css" href="sample.css">
+
+
+</head>
+<body>
+<div id="sample">
+	
+</div>
+
+<script type="text/babel">
+
+	
+
+
+	var CommentList = React.createClass({
+
+		
+		render:function() {
+			var comments = this.props.comments;
+			return (
+				<div className="comment-list">
+				{	
+					comments.map(function(comment,index){
+						return <Comment key={index} author={comment.author}>{comment.body}</Comment>
+					})
+				}
+				
+			        
+			    </div>
+			)
+		}
+	})
+
+	
+	
+
+	var CommentBox = React.createClass({
+		getInitialState:function(){
+			return {
+				comments:[]
+			}
+		},
+		componentDidMount:function(){
+			this.getCommonts()
+		},
+		getCommonts:function(){
+			var that = this;
+			setTimeout(function(){
+				that.setState({
+					comments:[{body:'this is my comment 1',
+						author:'author1'},{body:'this is my comment 2',
+						author:'author2'}]
+					})
+				},3000)
+		},
+		render:function() {
+			return (
+				<div className="comment-box">
+			        <h1>Comments</h1>
+			        <CommentList comments={this.state.comments}/>
+			        <CommentForm/>
+			    </div>
+			)
+		}
+	})
+
+	var Comment = React.createClass({
+		render:function() {
+			return (
+				<div>
+					<div className="comment-body">
+				        {this.props.children} 
+				    </div>
+				    <div className="comment-author">
+				        - {this.props.author} 
+				    </div>
+				</div>
+			)
+		}
+	})
+
+	var CommentForm = React.createClass({
+		render:function() {
+			return (
+				<form className="comment-form" ref="form" onSubmit={this.handleSubmit}>
+			        <input type="text" placeholder="Your name" ref="author"/>
+			        <input type="text" placeholder="Input your comment" ref="body"/>
+			        <input type="submit" value="Add Comment"/>
+			    </form>
+			)
+		},
+		handleSubmit:function(e){
+			e.preventDefault();
+			console.log(e)
+		}
+	})
+
+	
+
+	ReactDOM.render(
+	  <CommentBox />,
+	  document.getElementById('sample')
+	);
+
+</script>
+</body>
+</html>

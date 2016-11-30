@@ -14,16 +14,32 @@
 <div id="sample">sample</div>
 
 <script type="text/babel">
-	var HelloWorld = React.createClass({
+
+	var Count = React.createClass({
+		getInitialState:function(){
+			return {
+				count:1
+			}
+		},
+		update:function(){
+			this.setState({
+				count: ++this.state.count
+			})
+		},
 		render:function() {
-			return (<div>Hello World!</div>)
+			return (
+				<div>
+					<h1 onClick={this.update}>Count</h1>
+					<h3>{this.state.count}</h3>
+				</div>
+			)
 		}
 	})
 
-
+	
 
 	ReactDOM.render(
-	  <HelloWorld/>,
+	  <Count />,
 	  document.getElementById('sample')
 	);
 
