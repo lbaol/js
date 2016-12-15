@@ -1,3 +1,7 @@
+/*
+  山寨co1
+*/
+
 function* gen(){
  
   var a = yield Promise.resolve('a-resolve');
@@ -9,7 +13,7 @@ function* gen(){
   
 }
 
-
+//手工执行
 var a = gen()
 a.next().value.then(function(data){
 	a.next(data).value.then(function(data){
@@ -18,3 +22,5 @@ a.next().value.then(function(data){
 		})
 	})
 })
+
+

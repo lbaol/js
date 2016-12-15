@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	
+<script type="text/javascript">
+	// array.map(callback,[ thisObject]);
+	var data = [{
+		num:1
+	},{
+		num:3
+	},{
+		num:2
+	},{
+		num:4
+	}];
+
+	data = data.sort(function(a,b) {
+		console.log(b.num - a.num)
+		return (b.num - a.num)
+	})
+
+	console.log(data);
+
+
+ 
+</script>
+</body>
+</html>

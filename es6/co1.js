@@ -1,8 +1,12 @@
+/*
+  co使用1，如果使用co的最基本方式，注意co的执行顺序
+*/
 var co = require('co');
 
 co(function *(){
   // yield any promise
   var result = yield Promise.resolve(true);
+  console.log(result);
 }).catch(onerror);
 
 co(function *(){
