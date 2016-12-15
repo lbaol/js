@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "babel -d pub/ src/",
+    "prepub": "npm run compile"
   },
   "author": "",
   "license": "ISC",
