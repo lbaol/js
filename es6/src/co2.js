@@ -7,24 +7,24 @@ var readFile = thunkify(fs.readFile);
 var co = require('co');
 
 
-var gen1 = function* (){
-  console.log('in gen1');
-  var r1 = yield readFile('file1.txt');
+var gen1 = function* (num){
+  console.log('task '+ num +'in gen1');
+  var r1 = yield readFile('task '+ num +'file1.txt');
   console.log(r1.toString());
-  var r2 = yield readFile('file2.txt');
+  var r2 = yield readFile('task '+ num +'file2.txt');
   console.log(r2.toString());
 };
 
 
-var gen2 = function* (){
-  console.log('in gen2');
-  var r2 = yield readFile('file3.txt');
+var gen2 = function* (num){
+  console.log('task '+ num +'in gen2');
+  var r2 = yield readFile('task '+ num +'file3.txt');
   console.log(r2.toString());
-  var r1 = yield readFile('file4.txt');
+  var r1 = yield readFile('task '+ num +'file4.txt');
   console.log(r1.toString());
 };
 
-for(var i = 0 ;i < 10 ; i++){
+for(var i = 0 ;i < 2 ; i++){
 	co(gen1)
 	co(gen2)
 	console.log('run------------'+i);

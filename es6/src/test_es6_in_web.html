@@ -28,7 +28,7 @@ function* gen(num){
 function run(gen){
   function next(data){
     var res = gen.next(data);
-    if(res.value.done == true) return;
+    if(res.done == true) return;
     res.value.then(next);
   }
 
@@ -41,9 +41,6 @@ run(gen(1));
 run(gen(2));
 run(gen(3));
 run(gen(4));
-run(gen(5));
-run(gen(6));
-run(gen(7));
 
 
 </script>

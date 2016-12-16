@@ -18,13 +18,18 @@ function run(fn){
 
   var gen  = fn();
 
-  function next(data){
-    var res = gen.next(data);
-    if(res.done == true) return;
-    res.value.then(next);
+  onFulfilled();
+
+  function onFulfilled(res){
+    var ret = gen.next(res);
+    
+    next(ret)
   }
 
-  next();
+  function next(ret){
+    if ( ret.done == true ) return;
+    ret.value.then(onFulfilled)
+  }
 
 }
 
